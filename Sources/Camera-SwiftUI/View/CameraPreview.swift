@@ -11,6 +11,9 @@ import AVFoundation
 import SwiftUI
 
 public struct CameraPreview: UIViewRepresentable {
+    
+    var videoGravity: AVLayerVideoGravity = .resizeAspectFill
+    
     public class VideoPreviewView: UIView {
         public override class var layerClass: AnyClass {
             AVCaptureVideoPreviewLayer.self
@@ -73,14 +76,13 @@ public struct CameraPreview: UIViewRepresentable {
         let viewFinder = VideoPreviewView()
         viewFinder.backgroundColor = .black
         viewFinder.videoPreviewLayer.cornerRadius = 0
+        viewFinder.videoPreviewLayer.videoGravity = videoGravity
         viewFinder.videoPreviewLayer.session = session
         viewFinder.videoPreviewLayer.connection?.videoOrientation = .portrait
         return viewFinder
     }
     
-    public func updateUIView(_ uiView: VideoPreviewView, context: Context) {
-        
-    }
+    public func updateUIView(_ uiView: VideoPreviewView, context: Context) {}
 }
 
 struct CameraPreview_Previews: PreviewProvider {

@@ -55,6 +55,7 @@ final class CameraModel: ObservableObject {
     
     func configure() {
         service.checkForPermissions()
+        service.preferredCameraPosition = .front
         service.configure()
     }
     
@@ -142,6 +143,8 @@ struct CameraView: View {
                         .accentColor(model.isFlashOn ? .yellow : .white)
                         
                         CameraPreview(session: model.session)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+                            .cornerRadius(30)
                             .gesture(
                                 DragGesture().onChanged({ (val) in
                                     //  Only accept vertical drag
@@ -174,7 +177,6 @@ struct CameraView: View {
                                     }
                                 }
                             )
-                            .animation(.easeInOut)
                         
                         
                         HStack {
