@@ -13,6 +13,7 @@ import SwiftUI
 public struct CameraPreview: UIViewRepresentable {
     
     var videoGravity: AVLayerVideoGravity = .resizeAspectFill
+    var backgroundColor: UIColor = .black
     
     public class VideoPreviewView: UIView {
         public override class var layerClass: AnyClass {
@@ -74,7 +75,7 @@ public struct CameraPreview: UIViewRepresentable {
     
     public func makeUIView(context: Context) -> VideoPreviewView {
         let viewFinder = VideoPreviewView()
-        viewFinder.backgroundColor = .black
+        viewFinder.backgroundColor = backgroundColor
         viewFinder.videoPreviewLayer.cornerRadius = 0
         viewFinder.videoPreviewLayer.videoGravity = videoGravity
         viewFinder.videoPreviewLayer.session = session
