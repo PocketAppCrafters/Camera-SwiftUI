@@ -15,6 +15,18 @@ public struct CameraPreview: UIViewRepresentable {
     var videoGravity: AVLayerVideoGravity = .resizeAspectFill
     var backgroundColor: UIColor = .black
     
+    public let session: AVCaptureSession
+    
+    public init(
+        session: AVCaptureSession,
+        videoGravity: AVLayerVideoGravity = .resizeAspectFill,
+        backgroundColor: UIColor = .black
+    ) {
+        self.session = session
+        self.videoGravity = videoGravity
+        self.backgroundColor = backgroundColor
+    }
+    
     public class VideoPreviewView: UIView {
         public override class var layerClass: AnyClass {
             AVCaptureVideoPreviewLayer.self
@@ -65,12 +77,6 @@ public struct CameraPreview: UIViewRepresentable {
             let gRecognizer = UITapGestureRecognizer(target: self, action: #selector(VideoPreviewView.focusAndExposeTap(gestureRecognizer:)))
             self.addGestureRecognizer(gRecognizer)
         }
-    }
-    
-    public let session: AVCaptureSession
-    
-    public init(session: AVCaptureSession) {
-        self.session = session
     }
     
     public func makeUIView(context: Context) -> VideoPreviewView {
